@@ -8,30 +8,37 @@ import { register } from '../serviceWorker';
 import useServiceWorkerRegistration from '../useServiceWorkerRegistration'
 import { platform } from 'os';
 import { messaging } from '../firebase'
-import { getToken } from '@firebase/messaging'
+import { getToken, isSupported } from '@firebase/messaging'
 
 
 
 export default function Home() {
 
-  async function requestPermission() {
-    const permission = await Notification.requestPermission();
-    if (permission === "granted") {
-      // Generate Token
-      const token = await getToken(messaging, {
-        vapidKey:
-          "BOoIrhz1ybLoFKswQgAfT8gGZ3r4IKjtMytNC8PttUCKFBh86Q6LO8kkf7KYlPseLfGnfDZllKJWtZaWUQ1i5zQ",
-      });
-      console.log("Token Gen", token);
-      // Send this token  to server ( db)
-    } else if (permission === "denied") {
-      alert("You denied for the notification");
-    }
-  }
+  // async function requestPermission() {
+  //   const permission = await Notification.requestPermission();
+  //   if (permission === "granted") {
+  //     // Generate Token
+  //     const token = await getToken(messaging, {
+  //       vapidKey:
+  //         "BOoIrhz1ybLoFKswQgAfT8gGZ3r4IKjtMytNC8PttUCKFBh86Q6LO8kkf7KYlPseLfGnfDZllKJWtZaWUQ1i5zQ",
+  //     });
+  //     console.log("Token Gen", token);
+  //     // Send this token  to server ( db)
+  //   } else if (permission === "denied") {
+  //     alert("You denied for the notification");
+  //   }
+  // }
 
   useEffect(() => {
+    (async () => {
+      const hasFirebaseMessagingSupport = await isSupported();
+      if (hasFirebaseMessagingSupport) {
+        const { requestForToken } = await import("../firebase");
+        await requestForToken();
+      }
+    })()
     // Req user for notification permission
-    requestPermission();
+    // requestPermission();
   }, []);
 
   // // const analytics = (): firebase.analytics.Analytics => firebase.analytics()
