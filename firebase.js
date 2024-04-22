@@ -11,12 +11,12 @@ const firebaseConfig = {
   appId: "1:409374673910:web:e3c8a75069bd334ba955d7"
 };
 
-// const firebaseApp = initializeApp(firebaseConfig);
+const firebaseApp = initializeApp(firebaseConfig);
 // const messaging = getMessaging(firebaseApp);
 
-initializeApp(firebaseConfig);
+// initializeApp(firebaseConfig);
 
-const messaging = getMessaging();
+const messaging = getMessaging(firebaseApp);
 
 const getFirebaseToken = async () => {
   try {
@@ -30,7 +30,6 @@ const getFirebaseToken = async () => {
   }
 };
 
-getFirebaseToken()
 
 export const requestForToken = async () => {
   try {

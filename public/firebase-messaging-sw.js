@@ -26,31 +26,31 @@ messaging.onBackgroundMessage((payload) => {
 
 
 
-// if ('serviceWorker' in navigator) {
-//   navigator.serviceWorker.register('/firebase-messaging-sw.js')
-//   .then(function(registration) {
-//     console.log('Registration successful, scope is:', registration.scope);
-//   }).catch(function(err) {
-//     console.log('Service worker registration failed, error:', err);
-//   });
-// }
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/firebase-messaging-sw.js')
+  .then(function(registration) {
+    console.log('Registration successful, scope is:', registration.scope);
+  }).catch(function(err) {
+    console.log('Service worker registration failed, error:', err);
+  });
+}
 
-// self.addEventListener("push", (event) => {
+self.addEventListener("push", (event) => {
 
-//   const notif = event.data.json().notification;
+  const notif = event.data.json().notification;
 
-//   event.waitUntil(self.registration.showNotification(notif.title , {
-//       body: notif.body,
-//       icon: notif.image,
-//       data: {
-//           url: notif.click_action
-//       }
-//   }));
+  event.waitUntil(self.registration.showNotification(notif.title , {
+      body: notif.body,
+      icon: notif.image,
+      data: {
+          url: notif.click_action
+      }
+  }));
 
-// });
+});
 
-// self.addEventListener("notificationclick", (event) => {
+self.addEventListener("notificationclick", (event) => {
 
-//   event.waitUntil(clients.openWindow(event.notification.data.url));
+  event.waitUntil(clients.openWindow(event.notification.data.url));
 
-// });
+});
