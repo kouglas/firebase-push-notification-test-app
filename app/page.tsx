@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { setupNotifications } from '../firebase';
 import { toastNotification, sendNativeNotification } from '../notificationHelpers';
 import useVisibilityChange from '../useVisibilityChange';
-import { register } from '../public/serviceWorker';
+import { register } from '../serviceWorker';
 import useServiceWorkerRegistration from '../useServiceWorkerRegistration'
 import { platform } from 'os';
 import { messaging } from '../firebase'
