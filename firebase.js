@@ -11,19 +11,20 @@ const firebaseConfig = {
   appId: "1:409374673910:web:e3c8a75069bd334ba955d7"
 };
 
-const firebaseApp = initializeApp(firebaseConfig);
+// const firebaseApp = initializeApp(firebaseConfig);
 // const messaging = getMessaging(firebaseApp);
 
-// initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
-const messaging = getMessaging(firebaseApp);
+const messaging = getMessaging();
 
 const getFirebaseToken = async () => {
   try {
     const currentToken = await getToken(messaging, { vapidKey: 'BOoIrhz1ybLoFKswQgAfT8gGZ3r4IKjtMytNC8PttUCKFBh86Q6LO8kkf7KYlPseLfGnfDZllKJWtZaWUQ1i5zQ' });
+    console.log(`currentToken: ${currentToken}`)
     if (!currentToken) {
       console.log("No registration token available. Request permission to generate one.");
-      console.log(`currentToken: ${currentToken}`)
+      
     }
   } catch (error) {
     console.log("An error occurred while retrieving token. ", error);
