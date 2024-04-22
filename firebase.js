@@ -30,6 +30,8 @@ const getFirebaseToken = async () => {
   }
 };
 
+getFirebaseToken()
+
 export const requestForToken = async () => {
   try {
     const permission = await Notification.requestPermission();
