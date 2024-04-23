@@ -11,11 +11,7 @@ const firebaseConfig = {
   appId: "1:409374673910:web:e3c8a75069bd334ba955d7"
 };
 
-// const firebaseApp = initializeApp(firebaseConfig);
-// const messaging = getMessaging(firebaseApp);
-
 initializeApp(firebaseConfig);
-
 const messaging = getMessaging();
 
 const getFirebaseToken = async () => {
@@ -24,13 +20,11 @@ const getFirebaseToken = async () => {
     console.log(`currentToken: ${currentToken}`)
     if (!currentToken) {
       console.log("No registration token available. Request permission to generate one.");
-      
     }
   } catch (error) {
     console.log("An error occurred while retrieving token. ", error);
   }
 };
-
 
 export const requestForToken = async () => {
   try {
